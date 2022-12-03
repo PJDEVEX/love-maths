@@ -1,85 +1,127 @@
 // wait for the DOM to finish loading before running the game
 // Get the button elements and add events listers to them
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
     // Create for loop for iteration of button events
     for (let button of buttons) {
         // Add an event listner for each button click
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             // Create an alert if submit button clicked
             // "this" refers to the buttom clicked
-            // then get the attributes of the "this", specific buttom
-            // if the data type of the button matches with "submit" alert will be executed
-            if (this.getAttribute("data-type" ) === "submit") {
-                alert("You clicked submit!"); 
+            // then get the attributes of the "this", a specific buttom
+            // if the data type of the button matches with "submit" answer will be checked
+            if (this.getAttribute("data-type") === "submit") {
+                checkAnswer();
                 // Create an alert if game buttons clicked
-            }   else { 
+            } else {
                 let gameType = this.getAttribute("data-type");
                 // Let the gamme to run when buttom loaded 
                 runGame(gameType);
             }
-        })
+        });
     }
 
-    // Set addition as the defualt game
+    // Set addition as the default game
     runGame("addition");
-})
+
+});
 /**
  * The main game "loop", called when the script is first oladed
  * and after the user's answer has been processed
  */
-// Add parameters to runGame that is gameType
+// Set parameters to runGame that is gameType
 function runGame(gameType) {
 
     // Create 2 random numbers between 1 and 25
-    let num1 = math.floor(math.random() * 25) +1;
-    let num2 = math.floor(math.random() * 25) +1;
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 
-    // check which game type is running using if statment
+    // check which game type is running using if statement
     // call appropriate function
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
-        else {
-            alert(`Unkown game type: ${gameType}`);
-            throw `Unkown game type: ${gameType}. Aborting!`;
-        }
+    } else {
+        // alert the user if a undefined game is selected and notifiy for debugging
+        alert(`Unkown game type: ${gameType}`);
+        throw `Unkown game type: ${gameType}. Aborting!`;
+    }
+}
+
+/**
+ * Check the answer agaisnt the first element in
+ * the returned calcualteCorrectAnswer array 
+ */
+function checkAnswer() {
+
+    // Retriving the user answer from DOM
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    // Getting the correct answer from the fuction
+    let calcualtedAnswer = calculateCorrectAnswer();
+    // See whether the user answer is right
+    let isCorrect = userAnswer === calcualtedAnswer[0];
+
+    if (isCorrect) {
+        // if correct, wish him
+        alert("Hey! You got it right! :D");
+    } else {
+        // if wrong encourage him
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calcualtedAnswer[0]}!`);
     }
 
+    // Run a another game from the same type
+    runGame(calcualtedAnswer[1]);
+
+    }
+
+/**
+ * Get the operands (the numbers) and operator (+, -, /, x)
+ * directly from the dom, and returns the correct answer.
+ */
+function calculateCorrectAnswer() {
+    // by default js consider all data get from DOM as string
+    // use parseInt to convert string to umbers
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById('operator').innerText;
+
+    // Check the operator before execution of the function
+    if (operator === "+") {
+        // perform if it is addition
+        return [operand1 + operand2, "addition"];
+        // if not, abort and notify in the console for debugging
+    }   else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting`;
+    }
+    }
+
+function incrementScore() {
+
 }
 
-function checkAnswer () {
-
-}
-
-function calculateCorrectAnswer () {
-
-}
-
-function incrementScore () {
-
-}
-
-function incrementWrongAnswer () {
+function incrementWrongAnswer() {
 
 }
 
 // interrogating html and calling elements that have operand1, operand2 and operator
-function displayAdditionQuestion (operand1, operand2) {
+function displayAdditionQuestion(operand1, operand2) {
+
+    // 
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
 }
 
-function displaySubtractQuestion () {
+function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion () {
+function displayMultiplyQuestion() {
 
 }
 
-function displayDivisionQuestion () {
+function displayDivisionQuestion() {
 
 }
