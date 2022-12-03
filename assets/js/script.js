@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Create an alert if game buttons clicked
             } else {
                 let gameType = this.getAttribute("data-type");
-                // Let the gamme to run when buttom loaded 
+                // Let the game to run when buttom loaded 
                 runGame(gameType);
             }
         });
@@ -42,7 +42,10 @@ function runGame(gameType) {
     // call appropriate function
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
-    } else {
+    } else if (gameType === "multiply") {
+        displayMultiplyQuestion(num1, num2);
+    } 
+    else {
         // alert the user if a undefined game is selected and notifiy for debugging
         alert(`Unkown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
@@ -90,10 +93,14 @@ function calculateCorrectAnswer() {
     if (operator === "+") {
         // perform if it is addition
         return [operand1 + operand2, "addition"];
-        // if not, abort and notify in the console for debugging
-    }   else {
-        alert(`Unimplemented operator ${operator}`);
-        throw `Unimplemented operator ${operator}. Aborting`;
+        
+    }   else if (operator === "x") {
+        // perform if it is multiply
+        return [operand1 * operand2, "multiply"];
+    }   // if not, abort and notify in the console for debugging
+        else {
+        alert(`Unimplementable operator ${operator}`);
+        throw `Unimplementable operator ${operator}. Aborting`;
     }
     }
 
@@ -108,7 +115,7 @@ function incrementWrongAnswer() {
 // interrogating html and calling elements that have operand1, operand2 and operator
 function displayAdditionQuestion(operand1, operand2) {
 
-    // 
+    // Add functionality to addition question
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
@@ -118,7 +125,13 @@ function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion() {
+// interrogating html and calling elements that have operand1, operand2 and operator
+function displayMultiplyQuestion(operand1, operand2) {
+
+    // Add functionality to multiply question
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 
 }
 
