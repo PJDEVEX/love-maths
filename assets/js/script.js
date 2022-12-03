@@ -46,7 +46,9 @@ function runGame(gameType) {
         displayMultiplyQuestion(num1, num2);
     }   else if (gameType === "subtract") {
         displaySubtractQuestion(num1, num2);
-    }   else {
+    }   else if (gameType === "division") {
+        displayDivisionQuestion(num1, num2);
+    }else {
         // alert the user if a undefined game is selected and notifiy for debugging
         alert(`Unkown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
@@ -100,7 +102,11 @@ function calculateCorrectAnswer() {
     }   else if (operator === "x") {
         // perform if it is multiply
         return [operand1 * operand2, "multiply"];
-    }   // if not, abort and notify in the console for debugging
+    }   else if (operator === "/") {
+        // perform if it is division
+        return [operand1 / operand2, "division"];
+    }
+    // if not, abort and notify in the console for debugging
         else {
         alert(`Unimplementable operator ${operator}`);
         throw `Unimplementable operator ${operator}. Aborting`;
@@ -144,6 +150,12 @@ function displayMultiplyQuestion(operand1, operand2) {
 
 }
 
-function displayDivisionQuestion() {
+// interrogating html and calling elements that have operand1, operand2 and operator
+function displayDivisionQuestion(operand1, operand2) {
+
+    // Add functionality to division question
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "/";
 
 }
