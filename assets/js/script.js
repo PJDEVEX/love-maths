@@ -20,8 +20,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Let the game to run when buttom loaded 
                 runGame(gameType);
             }
-        });
+        })
     }
+
+    // Let user to submit answers using enter key
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
 
     // Set addition as the default game
     runGame("addition");
@@ -33,6 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 // Set parameters to runGame that is gameType
 function runGame(gameType) {
+
+    // Make the answer box empty for a new attempt always
+    document.getElementById("answer-box").value = "";
+    // Get the cursor point always on answer box
+    document.getElementById("answer-box").focus();
+
 
     // Create 2 random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
