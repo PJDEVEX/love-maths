@@ -42,10 +42,11 @@ function runGame(gameType) {
     // call appropriate function
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
-    } else if (gameType === "multiply") {
+    }   else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
-    } 
-    else {
+    }   else if (gameType === "subtract") {
+        displaySubtractQuestion(num1, num2);
+    }   else {
         // alert the user if a undefined game is selected and notifiy for debugging
         alert(`Unkown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
@@ -93,7 +94,9 @@ function calculateCorrectAnswer() {
     if (operator === "+") {
         // perform if it is addition
         return [operand1 + operand2, "addition"];
-        
+    }   else if (operator === "-") {
+        // perform if it is substract
+        return [operand1 - operand2, "subtract"];
     }   else if (operator === "x") {
         // perform if it is multiply
         return [operand1 * operand2, "multiply"];
@@ -121,7 +124,13 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+";
 }
 
-function displaySubtractQuestion() {
+// interrogating html and calling elements that have operand1, operand2 and operator
+function displaySubtractQuestion(operand1, operand2) {
+
+    // Add functionality to substact question
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = "-";
 
 }
 
