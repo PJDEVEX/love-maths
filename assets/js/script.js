@@ -84,9 +84,11 @@ function checkAnswer() {
     if (isCorrect) {
         // if correct, wish him
         alert("Hey! You got it right! :D");
+        incrementScore();
     } else {
         // if wrong encourage him
         alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calcualtedAnswer[0]}!`);
+        incrementWrongAnswer();
     }
 
     // Run a another game from the same type
@@ -131,18 +133,18 @@ function calculateCorrectAnswer() {
  */
 function incrementScore() {
 
-    let oldscore = parseInt(document.getElementById("score").innerText);
-    document.getElementById("score").innerText = ++oldscore;
-}
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
 
+}
 /**
  * Gets the current incorrect answers from the DOM and increments it by 1
  */
 function incrementWrongAnswer() {
 
-    
-    let oldscore = parseInt(document.getElementById("incorrect").innerText);
-    document.getElementById("incorrect").innerText = ++oldscore;
+    // Adding ++ before the text will update the html innertext before loading the value
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 }
 
 // interrogating html and calling elements that have operand1, operand2 and operator
