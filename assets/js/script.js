@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Let user to submit answers using enter key
-    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+    document.getElementById("answer-box").addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             checkAnswer();
         }
@@ -55,13 +55,13 @@ function runGame(gameType) {
     // call appropriate function
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
-    }   else if (gameType === "multiply") {
+    } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
-    }   else if (gameType === "subtract") {
+    } else if (gameType === "subtract") {
         displaySubtractQuestion(num1, num2);
-    }   else if (gameType === "division") {
+    } else if (gameType === "division") {
         displayDivisionQuestion(num1, num2);
-    }else {
+    } else {
         // alert the user if a undefined game is selected and notifiy for debugging
         alert(`Unkown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
@@ -94,7 +94,7 @@ function checkAnswer() {
     // Run a another game from the same type
     runGame(calcualtedAnswer[1]);
 
-    }
+}
 
 /**
  * Get the operands (the numbers) and operator (+, -, /, x)
@@ -111,22 +111,22 @@ function calculateCorrectAnswer() {
     if (operator === "+") {
         // perform if it is addition
         return [operand1 + operand2, "addition"];
-    }   else if (operator === "-") {
+    } else if (operator === "-") {
         // perform if it is substract
         return [operand1 - operand2, "subtract"];
-    }   else if (operator === "x") {
+    } else if (operator === "x") {
         // perform if it is multiply
         return [operand1 * operand2, "multiply"];
-    }   else if (operator === "/") {
+    } else if (operator === "/") {
         // perform if it is division
         return [operand1 / operand2, "division"];
     }
     // if not, abort and notify in the console for debugging
-        else {
+    else {
         alert(`Unimplementable operator ${operator}`);
         throw `Unimplementable operator ${operator}. Aborting`;
     }
-    }
+}
 
 /**
  * Gets the current score from the DOM and increments it by 1
@@ -180,7 +180,7 @@ function displayMultiplyQuestion(operand1, operand2) {
 function displayDivisionQuestion(operand1, operand2) {
 
     // Add functionality to division question
-    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand1').textContent = operand1 * operand2;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "/";
 
